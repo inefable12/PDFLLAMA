@@ -4,7 +4,7 @@ import pandas as pd
 from io import StringIO
 
 # Título de la página
-st.Title("PARTE 1: Extrae texto de PDF")
+st.title("PARTE 1: Extrae texto de PDF")
 
 st.subheader("Autor: Jesus Alvarado Huayhuaz")
 
