@@ -27,8 +27,9 @@ if pdf_file_obj is not None:
     palabras = text.split()  # Dividir el texto en palabras
     muestra = " ".join(palabras[int(inicio):int(fin)])  # Seleccionar las palabras del rango dado
 
-    # Mostrar el texto seleccionado
-    st.write(muestra)
 else:
     st.info("Por favor, sube un archivo PDF.")
+
+# Mostrar el texto seleccionado
+st.write(muestra)
 
