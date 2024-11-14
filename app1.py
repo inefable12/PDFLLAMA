@@ -25,5 +25,5 @@ inicio = st.number_input("Palabras desde")
 #st.write("Palabra desde: ", inicio)
 fin = st.number_input("Palabras hasta")
 
-st.write(text[inicio:fin])
+st.write(text[0:100])
 
