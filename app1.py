@@ -17,14 +17,16 @@ if pdf_file_obj is not None:
     text = ""
     for page in pdf_reader.pages:
         text += page.extract_text()
-    #st.write(text)
-    inicio = st.number_input("Palabras desde")
-    #st.write("Palabra desde: ", inicio)
-    fin = st.number_input("Palabras hasta")
-    muestra = text[{inicio}:{fin}] 
-    st.write(muestra)
+# Configuración de límites de palabras para mostrar
+    inicio = st.number_input("Palabras desde", min_value=0, max_value=len(text.split()), value=0, step=1)
+    fin = st.number_input("Palabras hasta", min_value=0, max_value=len(text.split()), value=len(text.split()), step=1)
 
+    # Asegurarse de que `inicio` y `fin` son enteros y extraer la subcadena
+    palabras = text.split()  # Dividir el texto en palabras
+    muestra = " ".join(palabras[int(inicio):int(fin)])  # Seleccionar las palabras del rango dado
+
+    # Mostrar el texto seleccionado
+    st.write(muestra)
 else:
     st.info("Por favor, sube un archivo PDF.")
-
 
