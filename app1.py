@@ -6,7 +6,7 @@ from io import StringIO
 # Título de la página
 st.title("PARTE 1: Extrae texto de PDF")
 
-st.write("Autor: Jesus Alvarado Huayhuaz")
+st.header("Autor: Jesus Alvarado Huayhuaz")
 
 # Agregar un botón para cargar archivo, solo permitiendo archivos PDF
 pdf_file_obj = st.file_uploader("Cargar archivo PDF", type="pdf")
