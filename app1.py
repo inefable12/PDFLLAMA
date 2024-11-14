@@ -17,4 +17,4 @@ else:
     st.info("Por favor, sube un archivo PDF.")
 
 #pdf_file_obj = open('articulo.pdf', 'rb')
-pdf_reader = PdfReader(pdf_file_obj)
+#pdf_reader = PdfReader(pdf_file_obj)
