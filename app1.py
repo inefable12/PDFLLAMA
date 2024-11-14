@@ -5,7 +5,9 @@ from io import StringIO
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # Título de la página
-st.title("PARTE 1: Extrae el texto del PDF")
+st.title("Analiza tu Artículo Científico con LLAMA3.2")
+
+st.header("PARTE 1: Extrae el texto del PDF")
 st.subheader("Autor: Jesus Alvarado Huayhuaz")
 
 # Agregar un botón para cargar archivo, solo permitiendo archivos PDF
@@ -37,7 +39,7 @@ else:
 
 
 
-st.title("PARTE 2: Crea Chunks")
+st.header("PARTE 2: Crea Chunks")
 
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=800,
@@ -45,5 +47,8 @@ text_splitter = RecursiveCharacterTextSplitter(
     length_function=len
     )
 
+chunks = text_splitter.split_text(text)
+
+st.write(len(chunks))
 
 
