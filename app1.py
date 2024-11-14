@@ -27,7 +27,13 @@ if pdf_file_obj is not None:
     letras = text.split()  # Dividir el texto en palabras
     muestra = " ".join(letras[int(inicio):int(fin)])  # Seleccionar las palabras del rango dado
     # Mostrar el texto seleccionado
-    st.write(muestra)
+    #st.write(muestra)
+    txt = st.text_area(
+        "Text to analyze",
+        muestra,
+    )
+
+    st.write(f"You wrote {len(txt)} characters.")
 
 else:
     st.info("Por favor, sube un archivo PDF.")
