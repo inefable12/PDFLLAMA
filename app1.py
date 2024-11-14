@@ -51,4 +51,7 @@ chunks = text_splitter.split_text(text)
 
 st.write(len(chunks))
 
+chunknumero = st.number_input("Chunk número:")
+st.write(chunks[chunknumero])
+
 
