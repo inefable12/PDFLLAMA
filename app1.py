@@ -55,4 +55,10 @@ chunk_num = st.number_input("Chunk número:", min_value=0, max_value=len(chunks)
 # Mostrar el chunk seleccionado
 st.write(chunks[int(chunk_num)])
 
+st.header("PARTE 3: Pregunta filtro")
+
+st.header("PARTE 4: Selecciona el texto a analizarse")
+
+st.header("PARTE 5: Pregunta LLAMA3.2")
+
 
