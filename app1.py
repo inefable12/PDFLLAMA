@@ -32,5 +32,7 @@ if pdf_file_obj is not None:
 else:
     st.info("Por favor, sube un archivo PDF.")
 
+st.title("PARTE 2: Extrae texto de PDF")
 
+st.subheader("Autor: Jesus Alvarado Huayhuaz")
 
