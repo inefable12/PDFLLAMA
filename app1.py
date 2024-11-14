@@ -18,12 +18,12 @@ if pdf_file_obj is not None:
     for page in pdf_reader.pages:
         text += page.extract_text()
     #st.write(text)
+    inicio = st.number_input("Palabras desde")
+    #st.write("Palabra desde: ", inicio)
+    fin = st.number_input("Palabras hasta")
+    st.write(text[0:100])
+
 else:
     st.info("Por favor, sube un archivo PDF.")
 
-inicio = st.number_input("Palabras desde")
-#st.write("Palabra desde: ", inicio)
-fin = st.number_input("Palabras hasta")
-
-st.write(text[0:100])
 
