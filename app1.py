@@ -48,10 +48,11 @@ text_splitter = RecursiveCharacterTextSplitter(
     )
 
 chunks = text_splitter.split_text(text)
+st.write("La cantidad total de Chunks es:", len(chunks))
 
-st.write(len(chunks))
-
-chunknumero = st.number_input("Chunk número:")
-st.write(chunks[chunknumero])
+# Entrada para seleccionar el número de chunk
+chunk_num = st.number_input("Chunk número:", min_value=0, max_value=len(chunks) - 1, step=1)
+# Mostrar el chunk seleccionado
+st.write(chunks[int(chunk_num)])
 
 
