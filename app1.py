@@ -2,10 +2,10 @@ from PyPDF2 import PdfReader
 import streamlit as st
 import pandas as pd
 from io import StringIO
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # Título de la página
-st.title("PARTE 1: Extrae texto de PDF")
-
+st.title("PARTE 1: Extrae el texto del PDF")
 st.subheader("Autor: Jesus Alvarado Huayhuaz")
 
 # Agregar un botón para cargar archivo, solo permitiendo archivos PDF
@@ -26,13 +26,10 @@ if pdf_file_obj is not None:
     # Asegurarse de que `inicio` y `fin` son enteros y extraer la subcadena
     letras = text.split()  # Dividir el texto en palabras
     muestra = " ".join(letras[int(inicio):int(fin)])  # Seleccionar las palabras del rango dado
-    # Mostrar el texto seleccionado
-    #st.write(muestra)
     txt = st.text_area(
-        "Texto a analizar",
+        "Texto extraido",
         muestra,
     )
-
     st.write(f"Escribiste {len(txt)} caracteres.")
 
 else:
@@ -40,7 +37,7 @@ else:
 
 
 
-st.title("PARTE 2: Extrae texto de PDF")
+st.title("PARTE 2: Crea Chunks")
 
-st.subheader("Autor: Jesus Alvarado Huayhuaz")
+
 
