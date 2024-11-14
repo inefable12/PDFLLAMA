@@ -29,14 +29,16 @@ if pdf_file_obj is not None:
     # Mostrar el texto seleccionado
     #st.write(muestra)
     txt = st.text_area(
-        "Text to analyze",
+        "Texto a analizar",
         muestra,
     )
 
-    st.write(f"You wrote {len(txt)} characters.")
+    st.write(f"Escribiste {len(txt)} caracteres.")
 
 else:
     st.info("Por favor, sube un archivo PDF.")
+
+
 
 st.title("PARTE 2: Extrae texto de PDF")
 
