@@ -21,7 +21,8 @@ if pdf_file_obj is not None:
     inicio = st.number_input("Palabras desde")
     #st.write("Palabra desde: ", inicio)
     fin = st.number_input("Palabras hasta")
-    st.write(text[0:100])
+    muestra = text[{inicio}:{fin}] 
+    st.write(muestra)
 
 else:
     st.info("Por favor, sube un archivo PDF.")
