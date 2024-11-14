@@ -17,9 +17,6 @@ if pdf_file_obj is not None:
     text = ""
     for page in pdf_reader.pages:
         text += page.extract_text()
-    st.write(text_data)
+    st.write(text)
 else:
     st.info("Por favor, sube un archivo PDF.")
-
-
-#
