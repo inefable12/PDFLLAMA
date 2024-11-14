@@ -20,12 +20,12 @@ if pdf_file_obj is not None:
     for page in pdf_reader.pages:
         text += page.extract_text()
 # Configuración de límites de palabras para mostrar
-    inicio = st.number_input("Letras desde", min_value=0, max_value=len(text.split()), value=0, step=1)
-    fin = st.number_input("Letras hasta", min_value=0, max_value=len(text.split()), value=len(text.split()), step=1)
+    inicio = st.number_input("Palabras desde", min_value=0, max_value=len(text.split()), value=0, step=1)
+    fin = st.number_input("Palabras hasta", min_value=0, max_value=len(text.split()), value=len(text.split()), step=1)
 
     # Asegurarse de que `inicio` y `fin` son enteros y extraer la subcadena
-    letras = text.split()  # Dividir el texto en palabras
-    muestra = " ".join(letras[int(inicio):int(fin)])  # Seleccionar las palabras del rango dado
+    palabras = text.split()  # Dividir el texto en palabras
+    muestra = " ".join(palabras[int(inicio):int(fin)])  # Seleccionar las palabras del rango dado
     txt = st.text_area(
         "Texto extraido",
         muestra,
@@ -38,6 +38,12 @@ else:
 
 
 st.title("PARTE 2: Crea Chunks")
+
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=800,
+    chunk_overlap=100,
+    length_function=len
+    )
 
 
 
