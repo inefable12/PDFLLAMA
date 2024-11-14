@@ -21,11 +21,10 @@ if pdf_file_obj is not None:
 else:
     st.info("Por favor, sube un archivo PDF.")
 
-st.text_input("hol")
-text[0:2000]
-
-
 inicio = st.number_input("Desde")
 st.write("Palabra desde: ", inicio)
 fin = st.number_input("Hasta")
 st.write("Palabras hasta: ", fin)
+
+st.write(text[{inicio}:{fin}])
+
