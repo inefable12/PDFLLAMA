@@ -77,8 +77,8 @@ st.write(embeddings)
 
 st.header("PARTE 4: Selecciona el texto a analizarse")
 
-pregunta = st.text_input("Escribe tu pregunta para filtrar los chunks", "What repositories or databases are mentioned?")
-st.write(f'Los de Chunks relacionados con la pregunta: "{pregunta}" + son:')
+pregunta = st.text_input("Escribe tu pregunta (en inglés) para filtrar los chunks", "What repositories or databases are mentioned?")
+st.write(f'Los 5 Chunks relacionados con la pregunta: "{pregunta}" son:')
 
 docs = knowledge_base.similarity_search(pregunta, 5)
 st.write(docs)
