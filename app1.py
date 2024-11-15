@@ -57,6 +57,8 @@ st.write(chunks[int(chunk_num)])
 
 st.header("PARTE 3: Pregunta filtro")
 
+from langchain.embeddings import HuggingFaceEmbeddings
+
 st.header("PARTE 4: Selecciona el texto a analizarse")
 
 st.header("PARTE 5: Pregunta LLAMA3.2")
