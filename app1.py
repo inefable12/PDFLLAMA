@@ -56,13 +56,13 @@ if text:
         length_function=len
         )
     
-    try:
-        chunks = text_splitter.split_text(text)
-        st.write(f"Total de chunks: {len(chunks)}")
-    except NameError:
-        st.write("Error: `text` no está definido. Por favor, asegúrate de proporcionar un texto válido.")
-    #chunks = text_splitter.split_text(text)
-    #st.write("La cantidad total de Chunks es:", len(chunks))
+    #try:
+    #    chunks = text_splitter.split_text(text)
+    #    st.write(f"Total de chunks: {len(chunks)}")
+    #except NameError:
+    #    st.write("Error: `text` no está definido. Por favor, asegúrate de proporcionar un texto válido.")
+    chunks = text_splitter.split_text(text)
+    st.write("La cantidad total de Chunks es:", len(chunks))
     
     # Entrada para seleccionar el número de chunk
     chunk_num = st.number_input("Visualizar el Chunk número:", min_value=0, max_value=len(chunks) - 1, step=1)
