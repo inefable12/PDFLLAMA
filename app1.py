@@ -79,9 +79,9 @@ st.write(embeddings)
 st.header("PARTE 4: Selección")
 
 pregunta = st.text_input("Escribe tu pregunta (en inglés) para filtrar los chunks", "What repositories or databases are mentioned?")
-st.write(f'Los 5 Chunks relacionados con la pregunta: "{pregunta}" son:')
+st.write(f'Los 3 Chunks relacionados con la pregunta: "{pregunta}" son:')
 
-docs = knowledge_base.similarity_search(pregunta, 5)
+docs = knowledge_base.similarity_search(pregunta, 3)
 st.write(docs)
 
 # Guardar la lista en un archivo .txt
@@ -107,7 +107,7 @@ for msg in st.session_state.messages:
 ##################################################
 
 def generate_response():
-    response = ollama.chat(model='llama3.2', stream=True, messages=st.session_state.messages)
+    response = ollama.chat(model='llama2', stream=True, messages=st.session_state.messages)
     for partial_resp in response:
         token = partial_resp["message"]["content"]
         st.session_state["full_message"] += token
