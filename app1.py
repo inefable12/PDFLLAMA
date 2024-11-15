@@ -3,9 +3,10 @@ import streamlit as st
 import pandas as pd
 from io import StringIO
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+import ollama
 
 # Título de la página
-st.title("Analiza tu Artículo Científico con LLAMA3.2")
+st.title("Analiza tu Artículo Científico con IA")
 st.subheader("Autor: Jesus Alvarado Huayhuaz")
 
 st.header("PARTE 1: Extrae el texto del PDF")
@@ -96,5 +97,29 @@ st.header("PARTE 5: Pregunta LLAMA3.2 💬")
 
 #if "messages" not in st.session_state:
 #    st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+
+for msg in st.session_state.messages:
+    if msg["role"] == "user":
+        st.chat_message(msg["role"], avatar="🧑‍💻").write(msg["content"])
+    else:
+        st.chat_message(msg["role"], avatar="🤖").write(msg["content"])
+
+##################################################
+
+def generate_response():
+    response = ollama.chat(model='llama3', stream=True, messages=st.session_state.messages)
+    for partial_resp in response:
+        token = partial_resp["message"]["content"]
+        st.session_state["full_message"] += token
+        yield token
+
+##################################################
+
+if prompt := st.chat_input():
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    st.chat_message("user", avatar="🧑‍💻").write(prompt)
+    st.session_state["full_message"] = ""
+    st.chat_message("assistant", avatar="🤖").write_stream(generate_response)
+    st.session_state.messages.append({"role": "assistant", "content": st.session_state["full_message"]})
 
 
