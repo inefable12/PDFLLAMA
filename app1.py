@@ -47,10 +47,13 @@ else:
 ##################################################
 if text:
     st.header("2. Chunks")
-    
+
+    chunk_size = st.number_input("Selecciona el tamaño del chunk", min_value=100, value=1000, step=100)
+    chunk_overlap = st.number_input("Selecciona el solapamiento del chunk", min_value=0, value=100, step=10)
+
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=800,
-        chunk_overlap=100,
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
         length_function=len
         )
   
