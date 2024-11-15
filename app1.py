@@ -7,9 +7,14 @@ import ollama
 from transformers import pipeline
 
 # Título de la página
-st.title("Análisis de Artículos sobre Gemelos Digitales")
+st.title("Extracción de chunks para artículos")
 #st.title("Analiza tu Artículo Científico con IA")
 #st.subheader("Autor: Jesus Alvarado Huayhuaz")
+st.write("""
+Extrae párrafos de artículos científicos en formato PDF relacionados 
+con tu pregunta de investigación. Esto permite mejorar la interacción
+y el análisis del texto con los modelos de procesamiento de lenguaje natural.
+""")
 
 st.header("PARTE 1: Extracción de texto")
 # Agregar un botón para cargar archivo, solo permitiendo archivos PDF
