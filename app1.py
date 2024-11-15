@@ -69,6 +69,8 @@ embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-
 from langchain.vectorstores import FAISS
 knowledge_base = FAISS.from_texts(chunks, embeddings)
 
+st.write(embeddings)
+
 ##################################################
 ##################################################
 ##################################################
@@ -79,6 +81,11 @@ pregunta = "What repositories or databases are mentioned?"
 docs = knowledge_base.similarity_search(pregunta, 3)
 
 st.write(docs)
+
+# Guardar la lista en un archivo .txt
+with open("mi_texto.txt", "w") as archivo:
+    for elemento in docs:
+        archivo.write(f"{elemento}\n")
 
 ##################################################
 ##################################################
