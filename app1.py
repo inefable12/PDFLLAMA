@@ -6,10 +6,9 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # Título de la página
 st.title("Analiza tu Artículo Científico con LLAMA3.2")
-
-st.header("PARTE 1: Extrae el texto del PDF")
 st.subheader("Autor: Jesus Alvarado Huayhuaz")
 
+st.header("PARTE 1: Extrae el texto del PDF")
 # Agregar un botón para cargar archivo, solo permitiendo archivos PDF
 pdf_file_obj = st.file_uploader("Cargar archivo PDF", type="pdf")
 
@@ -55,12 +54,16 @@ chunk_num = st.number_input("Chunk número:", min_value=0, max_value=len(chunks)
 # Mostrar el chunk seleccionado
 st.write(chunks[int(chunk_num)])
 
-st.header("PARTE 3: Pregunta filtro")
+st.header("PARTE 3: Crear Embeddings")
 
 from langchain.embeddings import HuggingFaceEmbeddings
+embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 
 st.header("PARTE 4: Selecciona el texto a analizarse")
 
-st.header("PARTE 5: Pregunta LLAMA3.2")
+st.header("PARTE 5: Pregunta LLAMA3.2 💬")
+
+#if "messages" not in st.session_state:
+#    st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
 
 
