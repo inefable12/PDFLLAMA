@@ -4,6 +4,7 @@ import pandas as pd
 from io import StringIO
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import ollama
+from transformers import pipeline
 
 # Título de la página
 st.title("Analiza tu Artículo Científico con IA")
@@ -84,20 +85,38 @@ st.write(f'Los 3 Chunks relacionados con la pregunta: "{pregunta}" son:')
 docs = knowledge_base.similarity_search(pregunta, 3)
 st.write(docs)
 
-# Guardar la lista en un archivo .txt
+##################################################
+# Escribir el contenido de docs en un archivo temporal
 with open("mi_texto.txt", "w") as archivo:
     for elemento in docs:
         archivo.write(f"{elemento}\n")
 
+# Leer el archivo y generar el botón de descarga en Streamlit
+with open("mi_texto.txt", "r") as archivo:
+    contenido = archivo.read()
+
+# Crear el botón de descarga
+st.download_button(
+    label="Descargar archivo",
+    data=contenido,
+    file_name="mi_texto.txt",
+    mime="text/plain"
+)
+
 ##################################################
 ##################################################
 ##################################################
 
+# Cargar el modelo de question-answering de Hugging Face
+question_answerer = pipeline("question-answering")
+
+##################################################
 st.header("PARTE 5: Pregunta 💬")
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "Por favor, detalla un poco más tu pregunta inicial?"}]
 
+# Mostrar mensajes anteriores
 for msg in st.session_state.messages:
     if msg["role"] == "user":
         st.chat_message(msg["role"], avatar="🧑‍💻").write(msg["content"])
@@ -106,21 +125,21 @@ for msg in st.session_state.messages:
 
 ##################################################
 
-def generate_response():
-    response = ollama.chat(model='llama2', stream=True, messages=st.session_state.messages)
-    for partial_resp in response:
-        token = partial_resp["message"]["content"]
-        st.session_state["full_message"] += token
-        yield token
+def generate_response(prompt):
+    # Generar respuesta utilizando el pipeline de question-answering
+    result = question_answerer(question=prompt, context=docs)
+    respuesta = f"Respuesta: '{result['answer']}', con una probabilidad de {round(result['score'] * 100)}%."
+    return respuesta
 
 ##################################################
 
+# Input del usuario para la pregunta
 if prompt := st.chat_input():
+    # Guardar la pregunta del usuario en el estado de la sesión
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user", avatar="🧑‍💻").write(prompt)
-    st.session_state["full_message"] = ""
-    st.chat_message("assistant", avatar="🤖").write_stream(generate_response)
-    st.session_state.messages.append({"role": "assistant", "content": st.session_state["full_message"]})
-    
 
-
+    # Generar respuesta y guardarla en el estado de la sesión
+    respuesta = generate_response(prompt)
+    st.chat_message("assistant", avatar="🤖").write(respuesta)
+    st.session_state.messages.append({"role": "assistant", "content": respuesta})
