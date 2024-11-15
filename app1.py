@@ -8,10 +8,9 @@ from transformers import pipeline
 st.title("Extrae párrafos de artículos científicos")
 st.subheader("Autor: Jesus Alvarado Huayhuaz")
 st.write("""
-Extrae párrafos de artículos científicos en formato PDF relacionados 
-con tu pregunta de investigación, para luego ser analizados con IA. 
-Esto permite mejorar la interacción y el análisis del texto con 
-los modelos de procesamiento de lenguaje natural.
+Extrae párrafos en formato TXT, a partir de artículos científicos en formato PDF
+relacionados con tu pregunta de investigación, para luego ser analizados con IA. 
+Esto permite mejorar la interacción y el análisis del texto con los modelos PLN.
 """)
 
 st.header("1. Extracción de texto")
