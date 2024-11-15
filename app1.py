@@ -23,7 +23,6 @@ pdf_file_obj = st.file_uploader("Cargar archivo PDF", type="pdf")
 # Mostrar un mensaje si se carga el archivo correctamente
 if pdf_file_obj is not None:
     st.success("Archivo PDF cargado exitosamente")
-    #pdf_file_obj = open(pdf_file, 'rb')
     pdf_reader = PdfReader(pdf_file_obj)
     text = ""
     for page in pdf_reader.pages:
@@ -43,7 +42,7 @@ if pdf_file_obj is not None:
 
 else:
     st.info("Por favor, sube un archivo PDF.")
-
+    text = None 
 ##################################################
 ##################################################
 ##################################################
