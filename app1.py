@@ -1,13 +1,13 @@
 from PyPDF2 import PdfReader
 import streamlit as st
-import pandas as pd
+#import pandas as pd
 from io import StringIO
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-import ollama
+#import ollama
 from transformers import pipeline
 
 # Título de la página
-st.title("Extracción de chunks para artículos")
+st.title("Generación de Chunks de artículos")
 #st.title("Analiza tu Artículo Científico con IA")
 #st.subheader("Autor: Jesus Alvarado Huayhuaz")
 st.write("""
@@ -47,27 +47,27 @@ else:
 ##################################################
 ##################################################
 ##################################################
-
-st.header("PARTE 2: Chunks")
-
-text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=800,
-    chunk_overlap=100,
-    length_function=len
-    )
-
-try:
-    chunks = text_splitter.split_text(text)
-    st.write(f"Total de chunks: {len(chunks)}")
-except NameError:
-    st.write("Error: `text` no está definido. Por favor, asegúrate de proporcionar un texto válido.")
-#chunks = text_splitter.split_text(text)
-#st.write("La cantidad total de Chunks es:", len(chunks))
-
-# Entrada para seleccionar el número de chunk
-chunk_num = st.number_input("Visualizar el Chunk número:", min_value=0, max_value=len(chunks) - 1, step=1)
-# Mostrar el chunk seleccionado
-st.write(chunks[int(chunk_num)])
+if text:
+    st.header("PARTE 2: Chunks")
+    
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=800,
+        chunk_overlap=100,
+        length_function=len
+        )
+    
+    try:
+        chunks = text_splitter.split_text(text)
+        st.write(f"Total de chunks: {len(chunks)}")
+    except NameError:
+        st.write("Error: `text` no está definido. Por favor, asegúrate de proporcionar un texto válido.")
+    #chunks = text_splitter.split_text(text)
+    #st.write("La cantidad total de Chunks es:", len(chunks))
+    
+    # Entrada para seleccionar el número de chunk
+    chunk_num = st.number_input("Visualizar el Chunk número:", min_value=0, max_value=len(chunks) - 1, step=1)
+    # Mostrar el chunk seleccionado
+    st.write(chunks[int(chunk_num)])
 
 ##################################################
 ##################################################
