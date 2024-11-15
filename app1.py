@@ -3,6 +3,7 @@ import streamlit as st
 from io import StringIO
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from transformers import pipeline
+import string
 
 # Título de la página
 st.title("Extrae párrafos de artículos científicos")
@@ -24,6 +25,12 @@ if pdf_file_obj is not None:
     text = ""
     for page in pdf_reader.pages:
         text += page.extract_text()
+
+    tokens = [t for t in text.split()]
+    tokens = [w.lower() for w in tokens]
+    table = str.maketrans('', '', string.punctuation.replace('.', ''))
+    stripped = [w.translate(table) for w in tokens]
+    text = ' '.join(stripped)   
 
     st.write("Explora el contenido por número de palabras")
 # Configuración de límites de palabras para mostrar
