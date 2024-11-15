@@ -9,7 +9,7 @@ import ollama
 st.title("Analiza tu Artículo Científico con IA")
 st.subheader("Autor: Jesus Alvarado Huayhuaz")
 
-st.header("PARTE 1: Extrae el texto del PDF")
+st.header("PARTE 1: Extracción de texto")
 # Agregar un botón para cargar archivo, solo permitiendo archivos PDF
 pdf_file_obj = st.file_uploader("Cargar archivo PDF", type="pdf")
 
@@ -41,7 +41,7 @@ else:
 ##################################################
 ##################################################
 
-st.header("PARTE 2: Crea Chunks")
+st.header("PARTE 2: Chunks")
 
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=800,
@@ -62,7 +62,7 @@ st.write(chunks[int(chunk_num)])
 ##################################################
 ##################################################
 
-st.header("PARTE 3: Crear Embeddings")
+st.header("PARTE 3: Embeddings")
 
 from langchain.embeddings import HuggingFaceEmbeddings
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
@@ -76,7 +76,7 @@ st.write(embeddings)
 ##################################################
 ##################################################
 
-st.header("PARTE 4: Selecciona el texto a analizarse")
+st.header("PARTE 4: Selección")
 
 pregunta = st.text_input("Escribe tu pregunta (en inglés) para filtrar los chunks", "What repositories or databases are mentioned?")
 st.write(f'Los 5 Chunks relacionados con la pregunta: "{pregunta}" son:')
@@ -93,10 +93,10 @@ with open("mi_texto.txt", "w") as archivo:
 ##################################################
 ##################################################
 
-st.header("PARTE 5: Pregunta LLAMA3.2 💬")
+st.header("PARTE 5: Pregunta 💬")
 
-#if "messages" not in st.session_state:
-#    st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+if "messages" not in st.session_state:
+    st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
 
 for msg in st.session_state.messages:
     if msg["role"] == "user":
