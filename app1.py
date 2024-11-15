@@ -53,7 +53,7 @@ chunks = text_splitter.split_text(text)
 st.write("La cantidad total de Chunks es:", len(chunks))
 
 # Entrada para seleccionar el número de chunk
-chunk_num = st.number_input("Chunk número:", min_value=0, max_value=len(chunks) - 1, step=1)
+chunk_num = st.number_input("Visualizar el Chunk número:", min_value=0, max_value=len(chunks) - 1, step=1)
 # Mostrar el chunk seleccionado
 st.write(chunks[int(chunk_num)])
 
