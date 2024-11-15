@@ -36,7 +36,9 @@ if pdf_file_obj is not None:
 else:
     st.info("Por favor, sube un archivo PDF.")
 
-
+##################################################
+##################################################
+##################################################
 
 st.header("PARTE 2: Crea Chunks")
 
@@ -54,12 +56,33 @@ chunk_num = st.number_input("Chunk número:", min_value=0, max_value=len(chunks)
 # Mostrar el chunk seleccionado
 st.write(chunks[int(chunk_num)])
 
+
+##################################################
+##################################################
+##################################################
+
 st.header("PARTE 3: Crear Embeddings")
 
 from langchain.embeddings import HuggingFaceEmbeddings
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 
+from langchain.vectorstores import FAISS
+knowledge_base = FAISS.from_texts(chunks, embeddings)
+
+##################################################
+##################################################
+##################################################
+
 st.header("PARTE 4: Selecciona el texto a analizarse")
+
+pregunta = "What repositories or databases are mentioned?"
+docs = knowledge_base.similarity_search(pregunta, 3)
+
+st.write(docs)
+
+##################################################
+##################################################
+##################################################
 
 st.header("PARTE 5: Pregunta LLAMA3.2 💬")
 
