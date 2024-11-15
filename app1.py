@@ -7,8 +7,9 @@ import ollama
 from transformers import pipeline
 
 # Título de la página
-st.title("Analiza tu Artículo Científico con IA")
-st.subheader("Autor: Jesus Alvarado Huayhuaz")
+st.title("Análisis de Artículos sobre Gemelos Digitales")
+#st.title("Analiza tu Artículo Científico con IA")
+#st.subheader("Autor: Jesus Alvarado Huayhuaz")
 
 st.header("PARTE 1: Extracción de texto")
 # Agregar un botón para cargar archivo, solo permitiendo archivos PDF
