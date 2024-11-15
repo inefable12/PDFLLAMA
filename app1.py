@@ -17,7 +17,6 @@ st.header("1. Extracción de texto")
 # Agregar un botón para cargar archivo, solo permitiendo archivos PDF
 pdf_file_obj = st.file_uploader("Cargar archivo PDF", type="pdf")
 
-st.write("Explora el contenido por número de palabras")
 # Mostrar un mensaje si se carga el archivo correctamente
 if pdf_file_obj is not None:
     st.success("Archivo PDF cargado exitosamente")
@@ -25,6 +24,8 @@ if pdf_file_obj is not None:
     text = ""
     for page in pdf_reader.pages:
         text += page.extract_text()
+
+    st.write("Explora el contenido por número de palabras")
 # Configuración de límites de palabras para mostrar
     inicio = st.number_input("Palabras desde", min_value=0, max_value=len(text.split()), value=0, step=1)
     fin = st.number_input("Palabras hasta", min_value=0, max_value=len(text.split()), value=len(text.split()), step=1)
