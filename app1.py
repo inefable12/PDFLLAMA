@@ -77,9 +77,10 @@ st.write(embeddings)
 
 st.header("PARTE 4: Selecciona el texto a analizarse")
 
-pregunta = "What repositories or databases are mentioned?"
-docs = knowledge_base.similarity_search(pregunta, 3)
+pregunta = st.text_input("Escribe tu pregunta para filtrar los chunks", "What repositories or databases are mentioned?")
+st.write("La cantidad total de Chunks es:", pregunta)
 
+docs = knowledge_base.similarity_search(pregunta, 5)
 st.write(docs)
 
 # Guardar la lista en un archivo .txt
