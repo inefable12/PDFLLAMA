@@ -1,25 +1,24 @@
 from PyPDF2 import PdfReader
 import streamlit as st
-#import pandas as pd
 from io import StringIO
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-#import ollama
 from transformers import pipeline
 
 # Título de la página
-st.title("Generación de Chunks de artículos")
-#st.title("Analiza tu Artículo Científico con IA")
-#st.subheader("Autor: Jesus Alvarado Huayhuaz")
+st.title("Extrae párrafos de artículos científicos")
+st.subheader("Autor: Jesus Alvarado Huayhuaz")
 st.write("""
 Extrae párrafos de artículos científicos en formato PDF relacionados 
-con tu pregunta de investigación. Esto permite mejorar la interacción
-y el análisis del texto con los modelos de procesamiento de lenguaje natural.
+con tu pregunta de investigación, para luego ser analizados con IA. 
+Esto permite mejorar la interacción y el análisis del texto con 
+los modelos de procesamiento de lenguaje natural.
 """)
 
-st.header("PARTE 1: Extracción de texto")
+st.header("1. Extracción de texto")
 # Agregar un botón para cargar archivo, solo permitiendo archivos PDF
 pdf_file_obj = st.file_uploader("Cargar archivo PDF", type="pdf")
 
+st.write("Explora el contenido por número de palabras")
 # Mostrar un mensaje si se carga el archivo correctamente
 if pdf_file_obj is not None:
     st.success("Archivo PDF cargado exitosamente")
@@ -35,7 +34,7 @@ if pdf_file_obj is not None:
     palabras = text.split()  # Dividir el texto en palabras
     muestra = " ".join(palabras[int(inicio):int(fin)])  # Seleccionar las palabras del rango dado
     txt = st.text_area(
-        "Texto extraido",
+        "Texto contenido",
         muestra,
     )
     st.write(f"Escribiste {len(txt)} caracteres.")
@@ -47,19 +46,14 @@ else:
 ##################################################
 ##################################################
 if text:
-    st.header("PARTE 2: Chunks")
+    st.header("2. Chunks")
     
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=800,
         chunk_overlap=100,
         length_function=len
         )
-    
-    #try:
-    #    chunks = text_splitter.split_text(text)
-    #    st.write(f"Total de chunks: {len(chunks)}")
-    #except NameError:
-    #    st.write("Error: `text` no está definido. Por favor, asegúrate de proporcionar un texto válido.")
+  
     chunks = text_splitter.split_text(text)
     st.write("La cantidad total de Chunks es:", len(chunks))
     
@@ -72,7 +66,7 @@ if text:
 ##################################################
 ##################################################
     
-    st.header("PARTE 3: Embeddings")
+    st.header("3. Embeddings")
     
     from langchain.embeddings import HuggingFaceEmbeddings
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
@@ -86,12 +80,15 @@ if text:
 ##################################################
 ##################################################
 
-    st.header("PARTE 4: Selección")
+    st.header("4. Selección")
+
+    num_chunks = st.number_input("Selecciona la cantidad de chunks a mostrar", min_value=1, value=3, step=1)
     
     pregunta = st.text_input("Escribe tu pregunta (en inglés) para filtrar los chunks", "What repositories or databases are mentioned?")
-    st.write(f'Los 3 Chunks relacionados con la pregunta: "{pregunta}" son:')
     
-    docs = knowledge_base.similarity_search(pregunta, 3)
+    st.write(f'Los {num_chunks} Chunks relacionados con la pregunta: "{pregunta}" son:')
+   
+    docs = knowledge_base.similarity_search(pregunta, num_chunks)
     st.write(docs)
 
 ##################################################
