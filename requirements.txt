@@ -5,3 +5,4 @@ sentence_transformers
 langchain-community
 ollama==0.1.8
 streamlit==1.33.0
+transformers
