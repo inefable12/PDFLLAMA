@@ -1,0 +1,15 @@
+#PyPDF2
+#langchain 
+#faiss-cpu 
+#sentence_transformers
+#langchain-community
+#streamlit==1.33.0
+#transformers
+
+streamlit
+pypdf
+langchain
+langchain-community
+sentence-transformers
+faiss-cpu
+torch

@@ -1,7 +1,0 @@
-PyPDF2
-langchain 
-faiss-cpu 
-sentence_transformers
-langchain-community
-streamlit==1.33.0
-transformers
